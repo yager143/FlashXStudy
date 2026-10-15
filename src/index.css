@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap');
+@import '@fontsource/alef/400.css';
+@import '@fontsource/alef/700.css';
+@import "tailwindcss";
+
+
+/* ─── CSS Variables: Dark Mode (default) ──────────────── */
+:root {
+  --bg: #09090b;
+  --surface: #121215;
+  --surface-2: #1c1c1f;
+  --border: #27272a;
+  --text: #fafafa;
+  --text-muted: #71717a;
+  --accent: #e11d48;
+  --accent-hover: #be123c;
+  --success: #10b981;
+  --success-dim: #064e3b;
+  --danger: #f43f5e;
+  --danger-dim: #4c0519;
+  --amber: #f59e0b;
+  --glass: rgba(18, 18, 21, 0.85);
+}
+
+/* ─── Light Mode Override ─────────────────────────────── */
+html:not(.dark) {
+  --bg: #f4f4f5;
+  --surface: #ffffff;
+  --surface-2: #f9f9fb;
+  --border: #e4e4e7;
+  --text: #09090b;
+  --text-muted: #71717a;
+  --accent: #e11d48;
+  --accent-hover: #be123c;
+  --success: #059669;
+  --success-dim: #d1fae5;
+  --danger: #f43f5e;
+  --danger-dim: #ffe4e6;
+  --glass: rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Base Reset ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Alef', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ─── 3D Card Flip ────────────────────────────────────── */
+.flip-card-container {
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--surface-2);
+}
+
+/* ─── Glassmorphism Modal Backdrop ────────────────────── */
+.glass-backdrop {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(9, 9, 11, 0.7);
+}
+
+/* ─── Glow Effects ────────────────────────────────────── */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.25), 0 0 60px rgba(225, 29, 72, 0.1);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), 0 0 60px rgba(16, 185, 129, 0.1);
+}
+
+.glow-danger {
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.25), 0 0 60px rgba(244, 63, 94, 0.1);
+}
+
+/* ─── Gradient Text ───────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #e11d48, #f43f5e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Shimmer Animation ───────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-2) 50%,
+    var(--surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Card Swipe Animations ───────────────────────────── */
+@keyframes swipeLeft {
+  to { transform: translateX(-120%) rotate(-8deg); opacity: 0; }
+}
+@keyframes swipeRight {
+  to { transform: translateX(120%) rotate(8deg); opacity: 0; }
+}
+
+.swipe-left {
+  animation: swipeLeft 0.35s ease-in forwards;
+}
+.swipe-right {
+  animation: swipeRight 0.35s ease-in forwards;
+}
+
+/* ─── Transition Utilities ────────────────────────────── */
+.transition-all-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
