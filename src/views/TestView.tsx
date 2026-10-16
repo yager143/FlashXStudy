@@ -297,9 +297,9 @@ export default function TestView() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-8 flex flex-col">
+      <main className="flex-1 flex flex-col">
         {totalCardsCount === 0 ? (
-          <div className="text-center p-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] space-y-4 my-auto">
+          <div className="w-full max-w-3xl mx-auto px-4 py-8 text-center rounded-2xl border border-[var(--border)] bg-[var(--surface)] space-y-4 my-auto">
             <p className="text-[var(--text-muted)] text-sm">
               This deck has no cards yet. Add cards to take a Practice Test!
             </p>
@@ -495,7 +495,7 @@ export default function TestView() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-full space-y-8"
+            className="w-full max-w-3xl mx-auto px-4 py-8 space-y-8"
           >
             {/* Header info */}
             <div className="space-y-1">
@@ -632,7 +632,7 @@ export default function TestView() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="w-full space-y-8"
+            className="w-full max-w-3xl mx-auto px-4 py-8 space-y-8"
           >
             {/* Score Summary Header Card */}
             <div className="p-8 rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl text-center space-y-6">

@@ -253,7 +253,7 @@ export default function MatchView() {
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
       {/* Top Header */}
       <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           {/* Back button with ONLY backwards arrow */}
           <button
             id="back-to-deck-btn"
@@ -306,7 +306,8 @@ export default function MatchView() {
       </header>
 
       {/* Main Game Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-6 py-8 flex flex-col justify-center items-center">
+      <main className="flex-1 flex flex-col">
+        <div className="w-full max-w-4xl mx-auto px-4 min-h-[75vh] flex flex-col items-center justify-center py-8">
         {activeCards.length === 0 ? (
           <div className="text-center p-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] space-y-4">
             <p className="text-[var(--text-muted)] text-sm">
@@ -475,6 +476,7 @@ export default function MatchView() {
             </div>
           </div>
         )}
+        </div>
       </main>
     </div>
   );

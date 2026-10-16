@@ -12,8 +12,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "electron:pack:mac": "npm run build && npx electron-builder --mac",
-    "electron:pack:win": "npm run build && npx electron-builder --win",
-    "pack:mac": "npm run build && electron-builder --mac --dmg"
+    "electron:pack:win": "npm run build && npx electron-builder --win"
   },
   "build": {
     "appId": "com.openquiz.studyapp",
@@ -31,13 +30,15 @@
         "dmg",
         "zip"
       ],
+      "icon": "assets/icon.icns",
       "identity": null
     },
     "win": {
       "target": [
         "nsis",
         "portable"
-      ]
+      ],
+      "icon": "assets/icon.ico"
     },
     "nsis": {
       "oneClick": false,

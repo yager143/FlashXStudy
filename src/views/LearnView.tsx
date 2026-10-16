@@ -147,81 +147,83 @@ export default function LearnView() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-8 flex flex-col justify-between">
-        {/* Progress Bar Header */}
-        {activeCards.length > 0 && !isDeckMastered && !isRoundComplete && (
-          <div className="mb-8">
-            <LearnProgressBar
-              round={currentRound}
-              totalCards={stats.totalCards}
-              level0Count={stats.level0Count}
-              level1Count={stats.level1Count}
-              level2Count={stats.level2Count}
-              deckMasteryPercent={stats.deckMasteryPercent}
-              roundQueueLength={roundQueueLength}
-            />
-          </div>
-        )}
-
-        {/* Study Content */}
-        <div className="flex-1 flex flex-col items-center justify-center">
-          <AnimatePresence mode="wait">
-            {activeCards.length === 0 ? (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-16"
-              >
-                <p className="text-[var(--text-muted)] text-base mb-4">
-                  This deck has no cards yet.
-                </p>
-                <button
-                  onClick={() => {
-                    setView('editor', activeDeckId ?? undefined);
-                    navigate(`/editor/${activeDeckId}`);
-                  }}
-                  className="px-5 py-2.5 rounded-xl bg-[var(--accent)] text-white font-semibold text-sm"
-                >
-                  Add Cards to Deck
-                </button>
-              </motion.div>
-            ) : isRoundComplete || isDeckMastered ? (
-              <LearnRoundSummary
-                key="summary"
+      <main className="flex-1 flex flex-col">
+        <div className="w-full max-w-3xl mx-auto px-4 min-h-[75vh] flex flex-col items-center justify-center">
+          {/* Progress Bar Header */}
+          {activeCards.length > 0 && !isDeckMastered && !isRoundComplete && (
+            <div className="w-full mb-8">
+              <LearnProgressBar
                 round={currentRound}
                 totalCards={stats.totalCards}
                 level0Count={stats.level0Count}
                 level1Count={stats.level1Count}
                 level2Count={stats.level2Count}
-                isDeckMastered={isDeckMastered}
-                onNextRound={actions.startNextRound}
-                onRestart={actions.restartSession}
-                onBackToDashboard={handleBackToDeck}
+                deckMasteryPercent={stats.deckMasteryPercent}
+                roundQueueLength={roundQueueLength}
               />
-            ) : currentQuestion ? (
-              currentQuestion.type === 'multiple-choice' ? (
-                <MultipleChoiceCard
-                  key={currentQuestion.id}
-                  question={currentQuestion}
-                  isAnswered={isAnswered}
-                  feedback={feedback}
-                  onSelectOption={actions.answerMultipleChoice}
-                  onNextQuestion={actions.nextQuestion}
+            </div>
+          )}
+
+          {/* Study Content */}
+          <div className="flex-1 w-full flex flex-col items-center justify-center">
+            <AnimatePresence mode="wait">
+              {activeCards.length === 0 ? (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-16"
+                >
+                  <p className="text-[var(--text-muted)] text-base mb-4">
+                    This deck has no cards yet.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setView('editor', activeDeckId ?? undefined);
+                      navigate(`/editor/${activeDeckId}`);
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-[var(--accent)] text-white font-semibold text-sm"
+                  >
+                    Add Cards to Deck
+                  </button>
+                </motion.div>
+              ) : isRoundComplete || isDeckMastered ? (
+                <LearnRoundSummary
+                  key="summary"
+                  round={currentRound}
+                  totalCards={stats.totalCards}
+                  level0Count={stats.level0Count}
+                  level1Count={stats.level1Count}
+                  level2Count={stats.level2Count}
+                  isDeckMastered={isDeckMastered}
+                  onNextRound={actions.startNextRound}
+                  onRestart={actions.restartSession}
+                  onBackToDashboard={handleBackToDeck}
                 />
-              ) : (
-                <WrittenAnswerCard
-                  key={currentQuestion.id}
-                  question={currentQuestion}
-                  isAnswered={isAnswered}
-                  feedback={feedback}
-                  onSubmitAnswer={actions.submitWrittenAnswer}
-                  onOverride={actions.overrideAnswer}
-                  onNextQuestion={actions.nextQuestion}
-                />
-              )
-            ) : null}
-          </AnimatePresence>
+              ) : currentQuestion ? (
+                currentQuestion.type === 'multiple-choice' ? (
+                  <MultipleChoiceCard
+                    key={currentQuestion.id}
+                    question={currentQuestion}
+                    isAnswered={isAnswered}
+                    feedback={feedback}
+                    onSelectOption={actions.answerMultipleChoice}
+                    onNextQuestion={actions.nextQuestion}
+                  />
+                ) : (
+                  <WrittenAnswerCard
+                    key={currentQuestion.id}
+                    question={currentQuestion}
+                    isAnswered={isAnswered}
+                    feedback={feedback}
+                    onSubmitAnswer={actions.submitWrittenAnswer}
+                    onOverride={actions.overrideAnswer}
+                    onNextQuestion={actions.nextQuestion}
+                  />
+                )
+              ) : null}
+            </AnimatePresence>
+          </div>
         </div>
       </main>
     </div>
