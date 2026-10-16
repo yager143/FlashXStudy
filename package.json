@@ -11,8 +11,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "electron:pack:mac": "npm run build && npx electron-builder --mac",
-    "electron:pack:win": "npm run build && npx electron-builder --win"
+    "electron:pack:mac": "npm run build && npx electron-builder --mac --publish never",
+    "electron:pack:win": "npm run build && npx electron-builder --win --publish never",
+    "pack:mac": "npm run build && npx electron-builder --mac --publish never"
   },
   "build": {
     "appId": "com.openquiz.studyapp",
